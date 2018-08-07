@@ -32,5 +32,19 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
        LFM.setPower(-(gamepad1.left_stick_y)/2);
        LBM.setPower(-(gamepad1.left_stick_y)/2);
 
+        while(gamepad1.right_trigger > 0) {
+            LFM.setPower(-0.5);
+            RFM.setPower(0.5);
+            LBM.setPower(0.5);
+            RBM.setPower(-0.5);
+        }
+        while(gamepad1.left_trigger > 0) {
+            LFM.setPower(0.5);
+            RFM.setPower(-0.5);
+            LBM.setPower(-0.5);
+            RBM.setPower(0.5);
+            }
+
+
     }
 }
