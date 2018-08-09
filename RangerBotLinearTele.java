@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,8 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp
 public class RangerBotLinearTele extends OpMode {
 
-    public DcMotor RightDrive;
-    public DcMotor LeftDrive;
+    private DcMotor RightDrive,LeftDrive;
 
 
     @Override
