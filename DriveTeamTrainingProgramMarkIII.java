@@ -22,6 +22,7 @@ public class DriveTeamTrainingProgramMarkIII extends OpMode{
 
         RFM.setDirection(DcMotor.Direction.REVERSE);
         RBM.setDirection(DcMotor.Direction.REVERSE);
+        telemetry.addLine("right stick for RFM,RBM left stick for LFM, LBM");
     }
 
     @Override
