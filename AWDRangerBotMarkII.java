@@ -1,4 +1,5 @@
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
@@ -6,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * 10/2/2018
  * diagonal driving too!
  */
+@TeleOp
 public class AWDRangerBotMarkII extends OpMode {
     private DcMotor RFM,RBM,LFM,LBM;
     //private int level = 0;
@@ -27,15 +29,16 @@ public class AWDRangerBotMarkII extends OpMode {
 
     @Override
     public void loop() {
-        RFM.setPower(-(gamepad1.right_stick_y) / 2);
-        RBM.setPower(-(gamepad1.right_stick_y) / 2);
-        LFM.setPower(-(gamepad1.left_stick_y) / 2);
-        LBM.setPower(-(gamepad1.left_stick_y) / 2);
+        RFM.setPower(-(gamepad1.right_stick_y));
+        RBM.setPower(-(gamepad1.right_stick_y));
+        LFM.setPower(-(gamepad1.left_stick_y));
+        LBM.setPower(-(gamepad1.left_stick_y));
 
-        RFM.setPower(-(gamepad1.left_stick_x) / 2);
-        RBM.setPower(-(gamepad1.right_stick_x) / 2);
-        LFM.setPower(-(gamepad1.right_stick_x) / 2);
-        LBM.setPower(-(gamepad1.left_stick_x) / 2);
+        RFM.setPower(-(gamepad1.left_stick_x));
+        RBM.setPower(-(gamepad1.right_stick_x));
+        LFM.setPower(-(gamepad1.right_stick_x));
+        LBM.setPower(-(gamepad1.left_stick_x));
+
 
 
         while(gamepad1.right_trigger > 0) { //strafing right
