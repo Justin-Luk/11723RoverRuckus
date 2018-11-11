@@ -1,5 +1,3 @@
-package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -20,35 +18,52 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
         LFM = hardwareMap.dcMotor.get("LFM"); //gets LFM on hardware map
         LBM = hardwareMap.dcMotor.get("LBM"); //gets LBM on hardware map
 
-
-
         LFM.setDirection(DcMotor.Direction.REVERSE); //sets both left side motors on reverse
         LBM.setDirection(DcMotor.Direction.REVERSE);
     }
+
     @Override
     public void loop() {
-       RFM.setPower(-(gamepad1.right_stick_y)/2); //establishes basic tank drive controls
-       RBM.setPower(-(gamepad1.right_stick_y)/2);
-       LFM.setPower(-(gamepad1.left_stick_y)/2);
-       LBM.setPower(-(gamepad1.left_stick_y)/2);
 
-        //while(gamepad1.right_trigger > 0) { //establishes strafing to the right
-           // LFM.setPower(-0.5);
-           // RFM.setPower(0.5);
-           // LBM.setPower(0.5);
-           // RBM.setPower(-0.5);
-       // }
-       // while(gamepad1.left_trigger > 0) { //establishes strafing to the left
-         //   LFM.setPower(0.5);
-           // RFM.setPower(-0.5);
-          //  LBM.setPower(-0.5);
-          //  RBM.setPower(0.5);
-            }
-       // while (gamepad1.a){ //establishes double speed
-            //    LFM.setPower(-(gamepad1.left_stick_y));
-               // LBM.setPower(-(gamepad1.left_stick_y));
-              //  RFM.setPower(-(gamepad1.right_stick_y));
-              //  RBM.setPower(-(gamepad1.right_stick_y));
-             //   }
-             //   }
+        RFM.setPower(-(gamepad1.right_stick_y)); //establishes basic tank drive controls
+        RBM.setPower(-(gamepad1.right_stick_y));
+        LFM.setPower(-(gamepad1.left_stick_y));
+        LBM.setPower(-(gamepad1.left_stick_y));
+
+        RFM.setPower(-(gamepad1.left_stick_x));
+        RBM.setPower(-(gamepad1.right_stick_x));
+        LFM.setPower(-(gamepad1.right_stick_x));
+        LBM.setPower(-(gamepad1.left_stick_x));
+
+        while(gamepad1.right_trigger > 0) { //establishes strafing to the right
+
+         LFM.setPower(-0.5);
+         RFM.setPower(0.5);
+         LBM.setPower(0.5);
+         RBM.setPower(-0.5);
+         }
+
+         while(gamepad1.left_trigger > 0) { //establishes strafing to the left
+
+           LFM.setPower(0.5);
+           RFM.setPower(-0.5);
+           LBM.setPower(-0.5);
+           RBM.setPower(0.5);
+
+    }
+
+    // while (gamepad1.a){ //establishes double speed
+
+    //    LFM.setPower(-(gamepad1.left_stick_y));
+
+    // LBM.setPower(-(gamepad1.left_stick_y));
+
+    //  RFM.setPower(-(gamepad1.right_stick_y));
+
+    //  RBM.setPower(-(gamepad1.right_stick_y));
+
+    //   }
+
+      }
+
 }
