@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.robot.Robot;
  */
 @TeleOp
 public class RoverRuckusTeleOpMarkII extends OpMode {
-    private DcMotor RFM,RBM,LFM,LBM; //Establishes motors
+    private DcMotor RFM,RBM,LFM,LBM,SlideLifter,Slider; //Establishes motors
 
     @Override
     public void init() {
@@ -17,6 +17,8 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
         RBM = hardwareMap.dcMotor.get("RBM"); //gets RBM on hardware map
         LFM = hardwareMap.dcMotor.get("LFM"); //gets LFM on hardware map
         LBM = hardwareMap.dcMotor.get("LBM"); //gets LBM on hardware map
+        SlideLifter = hardwareMap.dcMotor.get("SlideLifter");
+        Slider = hardwareMap.dcMotor.get("Slider");
 
         LFM.setDirection(DcMotor.Direction.REVERSE); //sets both left side motors on reverse
         LBM.setDirection(DcMotor.Direction.REVERSE);
@@ -29,6 +31,8 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
         RBM.setPower(-(gamepad1.right_stick_y));
         LFM.setPower(-(gamepad1.left_stick_y));
         LBM.setPower(-(gamepad1.left_stick_y));
+        SlideLifter.setPower(-(gamepad2.left_stick_y)/2);
+        Slider.setPower((gamepad2.right_stick_y)/2);
 
         RFM.setPower(-(gamepad1.left_stick_x));
         RBM.setPower(-(gamepad1.right_stick_x));
@@ -51,6 +55,7 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
            RBM.setPower(0.5);
 
     }
+
 
     // while (gamepad1.a){ //establishes double speed
 
