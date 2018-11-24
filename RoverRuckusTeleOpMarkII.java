@@ -1,7 +1,9 @@
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 
 /**
@@ -10,6 +12,7 @@ import com.qualcomm.robotcore.robot.Robot;
 @TeleOp
 public class RoverRuckusTeleOpMarkII extends OpMode {
     private DcMotor RFM,RBM,LFM,LBM,SlideLifter,Slider; //Establishes motors
+    private CRServo S1, S2;
 
     @Override
     public void init() {
@@ -19,6 +22,9 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
         LBM = hardwareMap.dcMotor.get("LBM"); //gets LBM on hardware map
         SlideLifter = hardwareMap.dcMotor.get("SlideLifter");
         Slider = hardwareMap.dcMotor.get("Slider");
+
+        S1 = hardwareMap.crservo.get("S1");
+        S2 = hardwareMap.crservo.get("S2");
 
         LFM.setDirection(DcMotor.Direction.REVERSE); //sets both left side motors on reverse
         LBM.setDirection(DcMotor.Direction.REVERSE);
@@ -33,6 +39,8 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
         LBM.setPower(-(gamepad1.left_stick_y));
         SlideLifter.setPower(-(gamepad2.left_stick_y)/2);
         Slider.setPower((gamepad2.right_stick_y)/2);
+        S1.setPower(gamepad2.left_stick_y);
+        S1.setPower(gamepad2.left_stick_y);
 
         RFM.setPower(-(gamepad1.left_stick_x));
         RBM.setPower(-(gamepad1.right_stick_x));
