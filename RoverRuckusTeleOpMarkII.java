@@ -28,6 +28,7 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
 
         LFM.setDirection(DcMotor.Direction.REVERSE); //sets both left side motors on reverse
         LBM.setDirection(DcMotor.Direction.REVERSE);
+        S2.setDirection(CRServo.Direction.REVERSE);
     }
 
     @Override
