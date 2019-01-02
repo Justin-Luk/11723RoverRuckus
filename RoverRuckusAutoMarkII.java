@@ -17,6 +17,7 @@ public class RoverRuckusAutoMarkII extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         int phase = 0;
         int oneRev = 28 * 40;
+        int threehalvesRev = 28*40*3/2;
 
         RFM = hardwareMap.dcMotor.get("RFM");
         RBM = hardwareMap.dcMotor.get("RBM");
