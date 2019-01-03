@@ -55,10 +55,12 @@ public class RoverRuckusTeleOpMarkII extends OpMode {
 
         if (gamepad2.dpad_up) {
             Lockservo.setPosition(.15);
+            telemetry.addLine("Ratchet engaged ");
         }
 
         if (gamepad2.dpad_down) {
             Lockservo.setPosition(0);
+            telemetry.addLine("Ratchet disengaged ");
         }
 
         while(gamepad1.right_trigger > 0) { //establishes strafing to the right
