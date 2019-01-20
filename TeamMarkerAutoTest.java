@@ -42,7 +42,10 @@ public class TeamMarkerAutoTest extends LinearOpMode {
     while (opModeIsActive()) {
 
         HM.setPower(0);
+        sleep(100);
         LockServo.setPosition(0);
+        HM.setPower(.3);
+        sleep(200);
         HM.setPower(-.5);
         sleep(2000);
 
