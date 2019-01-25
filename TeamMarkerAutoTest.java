@@ -1,3 +1,6 @@
+import com.disnodeteam.dogecv.CameraViewDisplay;
+import com.disnodeteam.dogecv.DogeCV;
+import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -15,10 +18,32 @@ public class TeamMarkerAutoTest extends LinearOpMode {
     private DcMotor RFM, RBM, LFM, LBM, HM, SlideRot, SlideLin;
     private CRServo S1, S2;
     private Servo LockServo, Marker;
+    private GoldAlignDetector detector;
 
     @Override
     public void runOpMode() throws InterruptedException {
-    RFM = hardwareMap.dcMotor.get("RFM");
+
+        telemetry.addData("Status", "DogeCV 2018.0 - Gold Align Example");
+
+        // Set up detector
+        detector = new GoldAlignDetector();
+        detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+        detector.useDefaults();
+
+        // Optional tuning
+        detector.alignSize = 100;
+        detector.alignPosOffset = 0;
+        detector.downscale = 0.4;
+
+        detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA;
+        detector.maxAreaScorer.weight = 0.005; //
+
+        detector.ratioScorer.weight = 5; //
+        detector.ratioScorer.perfectRatio = 1.0; // Ratio adjustment
+
+        detector.enable(); // Start the detector!
+
+        RFM = hardwareMap.dcMotor.get("RFM");
     RBM = hardwareMap.dcMotor.get("RBM");
     LFM = hardwareMap.dcMotor.get("LFM");
     LBM = hardwareMap.dcMotor.get("LBM");
@@ -41,9 +66,40 @@ public class TeamMarkerAutoTest extends LinearOpMode {
     waitForStart();
     while (opModeIsActive()) {
 
+
+        telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral?
+        telemetry.addData("X Pos" , detector.getXPosition()); // Gold X position.
+
+        if(detector.getAligned() == true){
+            LFM.setPower(0.4);
+            RFM.setPower(-0.4);
+            LBM.setPower(-0.4);
+            RBM.setPower(0.4);
+            sleep(1500);
+        }
+        else if (detector.getAligned() == false) {
+            RFM.setPower(-0.15);
+            RBM.setPower(-0.15);
+            LFM.setPower(-0.15);
+            LBM.setPower(-0.15);
+            sleep(1000);
+            RFM.setPower(0);
+            RBM.setPower(0);
+            LFM.setPower(0);
+            LBM.setPower(0);
+        }
+
+        sleep(100);
+        if(detector.getAligned() == true) {
+            LFM.setPower(0.4);
+            RFM.setPower(-0.4);
+            LBM.setPower(-0.4);
+            RBM.setPower(0.4);
+            sleep(1500);
+        }
         HM.setPower(0);
         sleep(100);
-        HM.setPower(.3);
+        HM.setPower(.5);
         sleep(100);
         LockServo.setPosition(0);
         HM.setPower(.5);
