@@ -59,7 +59,7 @@ public class TeamMarkerAutoTest extends LinearOpMode {
     LFM.setDirection(DcMotor.Direction.REVERSE);
     LBM.setDirection(DcMotor.Direction.REVERSE);
     S2.setDirection(CRServo.Direction.REVERSE);
-
+    int phase = 0;
     Marker.setPosition(.7);
     LockServo.setPosition(.55);
 
@@ -67,79 +67,88 @@ public class TeamMarkerAutoTest extends LinearOpMode {
     while (opModeIsActive()) {
 
 
-        telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral?
-        telemetry.addData("X Pos" , detector.getXPosition()); // Gold X position.
+        if (phase == 0) {
+            telemetry.addData("IsAligned", detector.getAligned()); // Is the bot aligned with the gold mineral?
+            telemetry.addData("X Pos", detector.getXPosition()); // Gold X position.
+            telemetry.addLine("phase 0");
+            if (detector.getAligned() == true) {
+                LFM.setPower(0.4);
+                RFM.setPower(-0.4);
+                LBM.setPower(-0.4);
+                RBM.setPower(0.4);
+                sleep(1500);
+                phase ++;
+            } else if (detector.getAligned() == false) {
+                RFM.setPower(-0.15);
+                RBM.setPower(-0.15);
+                LFM.setPower(-0.15);
+                LBM.setPower(-0.15);
+                sleep(1000);
+                RFM.setPower(0);
+                RBM.setPower(0);
+                LFM.setPower(0);
+                LBM.setPower(0);
+            }
 
-        if(detector.getAligned() == true){
-            LFM.setPower(0.4);
-            RFM.setPower(-0.4);
-            LBM.setPower(-0.4);
-            RBM.setPower(0.4);
-            sleep(1500);
+            sleep(100);
+            if (detector.getAligned() == true) {
+                LFM.setPower(0.4);
+                RFM.setPower(-0.4);
+                LBM.setPower(-0.4);
+                RBM.setPower(0.4);
+                sleep(1500);
+                phase ++;
+            }
         }
-        else if (detector.getAligned() == false) {
-            RFM.setPower(-0.15);
-            RBM.setPower(-0.15);
-            LFM.setPower(-0.15);
-            LBM.setPower(-0.15);
+        if (phase == 1) {
+            telemetry.addLine("phase 1");
+            detector.disable();
+            HM.setPower(0);
+            sleep(100);
+            HM.setPower(.5);
+            sleep(100);
+            LockServo.setPosition(0);
+            HM.setPower(.5);
+            sleep(500);
+            HM.setPower(-.5);
+            sleep(2000);
+            phase ++;
+        }
+
+        if (phase == 2) {
+            RFM.setPower(-1);
+            RBM.setPower(-1);
+            LFM.setPower(-1);
+            LBM.setPower(-1);
+            sleep(100);
+
+            LFM.setPower(0.5);
+            RFM.setPower(-0.5);
+            LBM.setPower(-0.5);
+            RBM.setPower(0.5);
+            sleep(500);
+
+            RFM.setPower(-0.5);
+            RBM.setPower(-0.5);
+            LFM.setPower(0.5);
+            LBM.setPower(0.5);
             sleep(1000);
+
+            RFM.setPower(.75);
+            RBM.setPower(.75);
+            LFM.setPower(.75);
+            LBM.setPower(.75);
+            sleep(2000);
+
+            Marker.setPosition(1);
+
             RFM.setPower(0);
             RBM.setPower(0);
             LFM.setPower(0);
             LBM.setPower(0);
+            HM.setPower(0);
+            sleep(1000000);
         }
-
-        sleep(100);
-        if(detector.getAligned() == true) {
-            LFM.setPower(0.4);
-            RFM.setPower(-0.4);
-            LBM.setPower(-0.4);
-            RBM.setPower(0.4);
-            sleep(1500);
-        }
-        HM.setPower(0);
-        sleep(100);
-        HM.setPower(.5);
-        sleep(100);
-        LockServo.setPosition(0);
-        HM.setPower(.5);
-        sleep(500);
-        HM.setPower(-.5);
-        sleep(2000);
-
-        RFM.setPower(-1);
-        RBM.setPower(-1);
-        LFM.setPower(-1);
-        LBM.setPower(-1);
-        sleep(100);
-
-        LFM.setPower(0.5);
-        RFM.setPower(-0.5);
-        LBM.setPower(-0.5);
-        RBM.setPower(0.5);
-        sleep(500);
-
-        RFM.setPower(-0.5);
-        RBM.setPower(-0.5);
-        LFM.setPower(0.5);
-        LBM.setPower(0.5);
-        sleep(1000);
-
-        RFM.setPower(.75);
-        RBM.setPower(.75);
-        LFM.setPower(.75);
-        LBM.setPower(.75);
-        sleep(2000);
-
-        Marker.setPosition(1);
-
-        RFM.setPower(0);
-        RBM.setPower(0);
-        LFM.setPower(0);
-        LBM.setPower(0);
-        HM.setPower(0);
-        sleep(1000000);
-
     }
     }
 }
