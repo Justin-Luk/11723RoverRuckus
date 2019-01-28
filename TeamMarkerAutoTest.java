@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
- * Created by Justin Luk 11723
+ * Created by Justin Luk for Canton GearHounds 11723
  * 1/19/2019
  */
 
@@ -44,12 +44,12 @@ public class TeamMarkerAutoTest extends LinearOpMode {
         detector.enable(); // Start the detector!
 
         RFM = hardwareMap.dcMotor.get("RFM");
-    RBM = hardwareMap.dcMotor.get("RBM");
-    LFM = hardwareMap.dcMotor.get("LFM");
-    LBM = hardwareMap.dcMotor.get("LBM");
-    HM = hardwareMap.dcMotor.get("Hanger");
-    SlideRot = hardwareMap.dcMotor.get("SlideRot");
-    SlideLin = hardwareMap.dcMotor.get("SlideLin");
+        RBM = hardwareMap.dcMotor.get("RBM");
+        LFM = hardwareMap.dcMotor.get("LFM");
+        LBM = hardwareMap.dcMotor.get("LBM");
+        HM = hardwareMap.dcMotor.get("Hanger");
+        SlideRot = hardwareMap.dcMotor.get("SlideRot");
+        SlideLin = hardwareMap.dcMotor.get("SlideLin");
 
     S1 = hardwareMap.crservo.get("S1");
     S2 = hardwareMap.crservo.get("S2");
@@ -68,6 +68,38 @@ public class TeamMarkerAutoTest extends LinearOpMode {
 
 
         if (phase == 0) {
+            telemetry.addLine("phase 1");       //get down from the lander
+            detector.disable();
+            HM.setPower(0);
+            sleep(100);
+            HM.setPower(.5);
+            sleep(100);
+            LockServo.setPosition(0);
+            HM.setPower(.5);
+            sleep(500);
+            HM.setPower(-.5);
+            sleep(2000);
+
+            RFM.setPower(-1);       //back up
+            RBM.setPower(-1);
+            LFM.setPower(-1);
+            LBM.setPower(-1);
+            sleep(100);
+
+            LFM.setPower(0.5);      //strafe to the right
+            RFM.setPower(-0.5);
+            LBM.setPower(-0.5);
+            RBM.setPower(0.5);
+            sleep(500);
+
+            RFM.setPower(.5);       //fowards to align with first mineral
+            RBM.setPower(.5);
+            LFM.setPower(.5);
+            LBM.setPower(.5);
+            sleep(100);
+            phase ++;
+        }
+        if (phase == 1) {
             telemetry.addData("IsAligned", detector.getAligned()); // Is the bot aligned with the gold mineral?
             telemetry.addData("X Pos", detector.getXPosition()); // Gold X position.
             telemetry.addLine("phase 0");
@@ -79,10 +111,10 @@ public class TeamMarkerAutoTest extends LinearOpMode {
                 sleep(1500);
                 phase ++;
             } else if (detector.getAligned() == false) {
-                RFM.setPower(-0.15);
-                RBM.setPower(-0.15);
-                LFM.setPower(-0.15);
-                LBM.setPower(-0.15);
+                RFM.setPower(-0.2);
+                RBM.setPower(-0.2);
+                LFM.setPower(-0.2);
+                LBM.setPower(-0.2);
                 sleep(1000);
                 RFM.setPower(0);
                 RBM.setPower(0);
@@ -100,34 +132,8 @@ public class TeamMarkerAutoTest extends LinearOpMode {
                 phase ++;
             }
         }
-        if (phase == 1) {
-            telemetry.addLine("phase 1");
-            detector.disable();
-            HM.setPower(0);
-            sleep(100);
-            HM.setPower(.5);
-            sleep(100);
-            LockServo.setPosition(0);
-            HM.setPower(.5);
-            sleep(500);
-            HM.setPower(-.5);
-            sleep(2000);
-            phase ++;
-        }
 
         if (phase == 2) {
-            RFM.setPower(-1);
-            RBM.setPower(-1);
-            LFM.setPower(-1);
-            LBM.setPower(-1);
-            sleep(100);
-
-            LFM.setPower(0.5);
-            RFM.setPower(-0.5);
-            LBM.setPower(-0.5);
-            RBM.setPower(0.5);
-            sleep(500);
-
             RFM.setPower(-0.5);
             RBM.setPower(-0.5);
             LFM.setPower(0.5);
@@ -148,7 +154,7 @@ public class TeamMarkerAutoTest extends LinearOpMode {
             LBM.setPower(0);
             HM.setPower(0);
             sleep(1000000);
+            }
         }
-    }
     }
 }
