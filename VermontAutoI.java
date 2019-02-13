@@ -12,6 +12,12 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
+
+/**
+ * Created by Justin Luk 11723
+ * 2/12/2019
+ */
+
 @Autonomous(name = "VermontAutoI")
 public class VermontAutoI extends LinearOpMode {
 
