@@ -165,7 +165,13 @@ public class VermontAutoI extends LinearOpMode {
                     RFM.setPower(-1);
                     LBM.setPower(-1);
                     RBM.setPower(1);
-                    sleep(5000);
+                    sleep(4000);
+                    //some kind of turn
+                    LFM.setPower(.5);
+                    LBM.setPower(.5);
+                    RFM.setPower(-.5);
+                    RBM.setPower(-.5);
+                    sleep(500);
                     Marker.setPosition(1);
                     LFM.setPower(-1); //back up
                     RFM.setPower(-1);
@@ -191,12 +197,28 @@ public class VermontAutoI extends LinearOpMode {
                     LBM.setPower(-1);
                     RBM.setPower(1);
                     sleep(5000);
+                    LFM.setPower(-.5);//Left turn
+                    LBM.setPower(-.5);
+                    RFM.setPower(.5);
+                    RBM.setPower(.5);
+                    sleep(500);
+                    LFM.setPower(1); //turn
+                    RFM.setPower(-1);
+                    LBM.setPower(1);
+                    RBM.setPower(-1);
+                    sleep(2000);
                     Marker.setPosition(1);
+                    LFM.setPower(-1); //turn
+                    RFM.setPower(1);
+                    LBM.setPower(-1);
+                    RBM.setPower(1);
+                    sleep(2000);
                     LFM.setPower(1); //fowards
                     RFM.setPower(1);
                     LBM.setPower(1);
                     RBM.setPower(1);
                     sleep(10000);
+
 
 
                     break;
@@ -212,10 +234,10 @@ public class VermontAutoI extends LinearOpMode {
                     RBM.setPower(1);
                     sleep(5000);
                     Marker.setPosition(1);
-                    LFM.setPower(-.5);
+                    LFM.setPower(-.5);//right turn
                     LBM.setPower(-.5);
-                    RFM.setPower(-.5);
-                    RBM.setPower(-.5);
+                    RFM.setPower(.5);
+                    RBM.setPower(.5);
                     sleep(500);
                     LFM.setPower(1); //fowards
                     RFM.setPower(1);
