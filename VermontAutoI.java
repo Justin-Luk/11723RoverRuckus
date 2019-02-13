@@ -15,9 +15,17 @@ import java.util.List;
 @Autonomous(name = "VermontAutoI")
 public class VermontAutoI extends LinearOpMode {
 
-    private DcMotor RFM, RBM, LFM, LBM, HM, SlideLifter,SLideLifter2, Slider;
-    private CRServo S1;
-    private Servo LockServo, Marker;
+    private DcMotor LFM = null;
+    private DcMotor RFM = null;
+    private DcMotor LBM = null;
+    private DcMotor RBM = null;
+    private DcMotor SlideLifter = null;
+    private DcMotor SlideLifter2 = null;
+    private DcMotor Slider = null;
+    private DcMotor HM = null;
+    private CRServo S1 = null;
+    private Servo LockServo = null;
+    private Servo Marker = null;
 
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -41,7 +49,7 @@ public class VermontAutoI extends LinearOpMode {
         LBM = hardwareMap.dcMotor.get("LBM");
         HM = hardwareMap.dcMotor.get("HM");
         SlideLifter = hardwareMap.dcMotor.get("SlideRotLeft");
-        SLideLifter2 = hardwareMap.dcMotor.get("SliderRotRight");
+        SlideLifter2 = hardwareMap.dcMotor.get("SliderRotRight");
         Slider = hardwareMap.dcMotor.get("SlideLin");
 
         S1 = hardwareMap.crservo.get("S1");
